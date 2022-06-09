@@ -1,17 +1,15 @@
-const { findByIdAndUpdate } = require('../models/user')
-const User = require('../models/user')
+const { findByIdAndUpdate } = require('../models    Sighting')
+const Sighting = require('../models/sighting')
 
 const index = (req, res, next) => {
-    console.log("index function reached")
-    // User.find({})
-    // .populate('owner')
-    // .then(ufo => res.json(ufo)) 
-    res.render('index.ejs')
+    Sighting.find({})
+    .populate('owner')
+    .then(ufo => res.render('index.ejs'))
 }
 
 
 let show = (req, res) => {
-    User.findById(req.params.id, (err, ufo) =>{
+    Sighting.findById(req.params.id, (err, ufo) =>{
         if(err){
             res.status(400).json(err)
             return
@@ -22,7 +20,7 @@ let show = (req, res) => {
 
 let create = (req, res) =>{
         console.log(req.body)
-    User.create(req.body, (err, ufo) =>{
+    Sighting.create(req.body, (err, ufo) =>{
         if(err){
             res.status(400).json(err)
             return        
@@ -32,7 +30,7 @@ let create = (req, res) =>{
 }
 
 let deleteUFO = (req, res) => {
-    User.findByIdAndDelete(req.params.id, (err, ufo) =>{
+    Sighting.findByIdAndDelete(req.params.id, (err, ufo) =>{
         if(err){
             res.status(400).json(err)
             return
@@ -42,7 +40,7 @@ let deleteUFO = (req, res) => {
 }
 
 let update = (req, res) => {
-    User,findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, ufo) =>{
+    Sighting,findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, ufo) =>{
         if(err){
             res.status(400).json(err)
             return
