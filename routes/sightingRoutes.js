@@ -3,6 +3,10 @@ const router = require('express').Router();
 const sightingCtrl = require('../controllers/sightingController');
 const passport = require('passport');
 
+router.get('/', function (req, res) {
+    res.redirect('/sightings')
+});
+
 router.get('/auth/google', passport.authenticate(
     'google',
     { scope: ['profile', 'email'] }
@@ -11,7 +15,7 @@ router.get('/auth/google', passport.authenticate(
 router.get('/oauth2callback', passport.authenticate(
     'google',
     {
-      successRedirect : '/UFOnly_Fans',
+      successRedirect : '/sightings',
       failureRedirect : '/'
     }
   ));
@@ -22,16 +26,16 @@ router.get('/logout', function(req, res){
     res.redirect('/');
   });
 
-
-
 router.get('/sightings', sightingCtrl.showSightings);
+
+router.get('/sightings/new', sightingCtrl.newSighting);
 
 router.post('/sightings', sightingCtrl.createSighting);
 
-router.get('/:id', sightingCtrl.showDetail);
+router.get('/sightings/:id', sightingCtrl.showDetail);
 
-router.patch('/:id', sightingCtrl.updateSighting);
+router.patch('/sightings/:id', sightingCtrl.updateSighting);
 
-router.delete('/:id', sightingCtrl.deleteSighting)
+router.delete('/sightings/:id', sightingCtrl.deleteSighting)
 
 module.exports = router;

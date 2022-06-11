@@ -1,7 +1,5 @@
 const Sighting = require('../models/sighting')
 
-
-
 function createSighting(req, res){
     let newSighting = new Sighting(req.body)
     newSighting.save(() => console.log("Sighting saved!"))
@@ -19,7 +17,7 @@ async function showSightings(req, res){
 
 function showDetail(req, res){
     console.log("Show Detail function ran")
-    Sighting,findById(req.params.SightingId).then((sighting) =>{
+    Sighting.findById(req.params.SightingId).then((sighting) =>{
         console.log("sighting")
         res.render('sightingDetail', {sighting})
     })

@@ -13,7 +13,6 @@ function(accessToken, refreshToken, profile, cb) {
     if (user) {
       return cb(null, user);
     } else {
-      // we have a new student via OAuth!
       var newUser = new User({
         name: profile.displayName,
         email: profile.emails[0].value,
@@ -26,27 +25,6 @@ function(accessToken, refreshToken, profile, cb) {
     }
   });
 }
-// function(accessToken, refreshToken, profile, cb) {
-//   console.log(profile)
-//   User.findOne({ 'googleId': profile.id }, function(err, user) {
-//     if (err) return cb(err);
-//     if (user) {
-//       return cb(null, user);
-//     } else {
-//       const newUser = new User({
-//         name: profile.displayName,
-//         email: profile.emails[0].value,
-//         googleId: profile.id
-//       });
-//       newUser.save(function(err) {
-//         if (err) {
-//           return cb(err);
-//         }
-//         return cb(null, newUser);
-//       });
-//     }
-//   });
-// }
 ));
 
 passport.serializeUser(function(user, done) {

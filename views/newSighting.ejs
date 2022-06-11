@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Report a new encounter</h1>
+    <form action="/sightings" method="POST">
+        Title: <input name="title" type="text"><br>
+        Description: <input name="desc" type="text"><br>
+        Location: <input name="location" type="text"><br>
+        Date of Event: <input name="date" type="text"><br>
+        Time of Day: <input name="tod" type="text"><br>
+        Age: <input name="age" type="number"><br>
+        <input type="submit" value="Submit Encounter">
+    </form>    
+</body>
+</html>
