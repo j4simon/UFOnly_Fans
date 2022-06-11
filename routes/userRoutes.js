@@ -12,7 +12,7 @@ router.get('/oauth2callback', passport.authenticate(
     'google',
     {
       successRedirect : '/UFOnly_Fans',
-      failureRedirect : '/index'
+      failureRedirect : '/'
     }
   ));
 

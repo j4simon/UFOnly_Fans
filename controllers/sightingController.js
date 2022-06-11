@@ -1,60 +1,46 @@
-const { findByIdAndUpdate } = require('../models    Sighting')
 const Sighting = require('../models/sighting')
 
-const index = (req, res, next) => {
-    Sighting.find({})
-    .populate('owner')
-    .then(ufo => res.render('index.ejs'))
+
+
+function createSighting(req, res){
+    let newSighting = new Sighting(req.body)
+    newSighting.save(() => console.log("Sighting saved!"))
+    res.redirect('/sightings')
 }
 
+function newSighting(req, res){
+    res.render('newSighting')
+}
 
-let show = (req, res) => {
-    Sighting.findById(req.params.id, (err, ufo) =>{
-        if(err){
-            res.status(400).json(err)
-            return
-        }
-        res.json(ufo)
+async function showSightings(req, res){
+    let allSightings = await Sighting.find({})
+    res.render('index', {allSightings})
+}
+
+function showDetail(req, res){
+    console.log("Show Detail function ran")
+    Sighting,findById(req.params.SightingId).then((sighting) =>{
+        console.log("sighting")
+        res.render('sightingDetail', {sighting})
     })
 }
 
-let create = (req, res) =>{
-        console.log(req.body)
-    Sighting.create(req.body, (err, ufo) =>{
-        if(err){
-            res.status(400).json(err)
-            return        
-        }
-        res.jason(ufo)
-    })
+async function updateSighting(req, res) {
+    await Sighting.findByIdAndUpdate(req.params.SightingId, req.body)
+    res.redirect(`/sightings${req.params.SightingId}`)
 }
 
-let deleteUFO = (req, res) => {
-    Sighting.findByIdAndDelete(req.params.id, (err, ufo) =>{
-        if(err){
-            res.status(400).json(err)
-            return
-        }
-        res.json({message:'Sighting deleted'})
-    })
+function deleteSighting(req, res) {
+    Sighting.findByIdAndDelete(req.params.SightingId)
+    res.redirect('/sightings')
 }
-
-let update = (req, res) => {
-    Sighting,findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, ufo) =>{
-        if(err){
-            res.status(400).json(err)
-            return
-        }
-        res.json(ufo)
-    })
-}
-
 
 module.exports = {
-    index,
-    show,
-    create,
-    deleteUFO,
-    update
+    createSighting,
+    newSighting,
+    showSightings,
+    showDetail,
+    updateSighting,
+    deleteSighting
 
 }

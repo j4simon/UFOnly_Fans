@@ -1,15 +1,37 @@
-var router = require('express').Router();
-var sightingCtrl = require('../controllers/sightingController');
+const express = require('express');
+const router = require('express').Router();
+const sightingCtrl = require('../controllers/sightingController');
+const passport = require('passport');
 
-// GET /students
-router.get('/UFOnly_Fans', sightingCtrl.index);
+router.get('/auth/google', passport.authenticate(
+    'google',
+    { scope: ['profile', 'email'] }
+  ));
 
-// POST /facts
-// We will already have access to the logged in student on
-// the server, therefore do not use: /students/:id/facts
-router.post('/facts', sightingCtrl.addFact);
+router.get('/oauth2callback', passport.authenticate(
+    'google',
+    {
+      successRedirect : '/UFOnly_Fans',
+      failureRedirect : '/'
+    }
+  ));
 
-// DELETE /facts/:id
-router.delete('/facts/:id', sightingCtrl.delFact);
+
+router.get('/logout', function(req, res){
+    req.logout();
+    res.redirect('/');
+  });
+
+
+
+router.get('/sightings', sightingCtrl.showSightings);
+
+router.post('/sightings', sightingCtrl.createSighting);
+
+router.get('/:id', sightingCtrl.showDetail);
+
+router.patch('/:id', sightingCtrl.updateSighting);
+
+router.delete('/:id', sightingCtrl.deleteSighting)
 
 module.exports = router;
