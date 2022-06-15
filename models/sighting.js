@@ -11,7 +11,8 @@ const sightingSchema = new mongoose.Schema({
     owner: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
-      required: true
+      // add back in once OAuth works
+      // required: true
     }
   }, {
     timestamps: true

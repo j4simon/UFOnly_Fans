@@ -7,6 +7,7 @@
     <title>UFOnly Fans</title>
 </head>
 <body>
+    <a href="/sightings">Go Back</a>
     <h1>Sighting Detail</h1>
     <h2>Title: <%= sighting.title %></h2>
     <h2>Description: <%= sighting.desc %></h2>
@@ -15,12 +16,19 @@
     <h2>Time of Day: <%= sighting.tod %></h2>
     <h2>Age at Encounter: <%= sighting.age %></h2>
 
-
-    </form>
-
-    <form method="POST" action="/cats/<%= cat._id %>?_method=DELETE">
-        <input type="submit" value="Delete Cat">
-    </form>
+    
+    <form method="POST" action="/sightings/<%= sighting._id %>?_method=PATCH">
+      Title: <input name="title" value="<%= sighting.title %>" type="text">
+      Description: <input name="desc" value="<%= sighting.desc %>" type="text">
+      Location: <input name="location" value="<%= sighting.location %>" type="text">
+      Date: <input name="date" value="<<%= sighting.date %>>" type="text">
+      Time of Day: <input name="tod" value="<%= sighting.tod %>" type="text">
+      Age: <input name="age" value="<%= sighting.age %>" type="text">
+      <input type="submit" value="Edit Encounter">
+  </form>  
+    <form method="POST" action="/sightings/<%= sighting._id %>?_method=DELETE">
+      <input type="submit" value="Delete Encounter">
+  </form>
   </ul>    
 </body>
 </html>

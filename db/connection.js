@@ -2,9 +2,9 @@
 const mongoose = require('mongoose')
 
 //connect to database
-mongoose.connect('mongodb://localhost:27017/UFOnly_Fans', {
-    useNewUrlParser: true
-})
+mongoose.connect(process.env.DATABASE_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true})
 
 const db = mongoose.connection
 

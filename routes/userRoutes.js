@@ -4,7 +4,7 @@ const userCtrl = require('../controllers/userController')
 const passport = require('passport');
 
 router.get('/', function (req, res) {
-    res.redirect('/sightings')
+    res.redirect('/sightings/user')
 });
 
 router.get('/auth/google', passport.authenticate(
@@ -26,15 +26,15 @@ router.get('/logout', function(req, res){
     res.redirect('/');
   });
 
-router.get('/UFOnly_Fans', userCtrl.index);
+router.get('/', userCtrl.index);
 
-router.post('/UFOnly_Fans', userCtrl.create);
+router.post('/', userCtrl.create);
 
-router.get('/UFOnly_Fans/:id', userCtrl.show);
+router.get('/user/:id', userCtrl.show);
 
-router.put('/UFOnly_Fans/:id', userCtrl.update);
+router.put('/user/:id', userCtrl.update);
 
-router.delete('/UFOnly_Fans/:id', userCtrl.deleteUFO)
+router.delete('/user/:id', userCtrl.deleteUFO)
 
 
 module.exports = router

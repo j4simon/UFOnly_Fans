@@ -7,24 +7,7 @@ router.get('/', function (req, res) {
     res.redirect('/sightings')
 });
 
-router.get('/auth/google', passport.authenticate(
-    'google',
-    { scope: ['profile', 'email'] }
-  ));
-
-router.get('/oauth2callback', passport.authenticate(
-    'google',
-    {
-      successRedirect : '/sightings',
-      failureRedirect : '/'
-    }
-  ));
-
-
-router.get('/logout', function(req, res){
-    req.logout();
-    res.redirect('/');
-  });
+router.get('/UFOnly_Fans', sightingCtrl.showSightings);
 
 router.get('/sightings', sightingCtrl.showSightings);
 
@@ -36,6 +19,7 @@ router.get('/sightings/:id', sightingCtrl.showDetail);
 
 router.patch('/sightings/:id', sightingCtrl.updateSighting);
 
-router.delete('/sightings/:id', sightingCtrl.deleteSighting)
+router.delete('/sightings/:id', sightingCtrl.deleteSighting);
+
 
 module.exports = router;

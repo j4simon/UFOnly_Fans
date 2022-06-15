@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="POST" action="/sightings/<%= sighting._id %>?_method=PATCH">
+        Title: <input name="title" value="<%= sighting.title %>" type="text">
+        Description: <input name="desc" value="<%= sighting.desc %>" type="text">
+        Location: <input name="location" value="<%= sighting.location %>" type="text">
+        Date: <input name="date" value="<<%= sighting.date %>>" type="text">
+        Time of Day: <input name="tod" value=""<%= sighting.tod %> type="text">
+        Age: <input name="age" value="<%= sighting.age %>" type="text">
+        <input type="submit" value="Edit Encounter">
+    </form>  
+    <form method="POST" action="/sightings/<%= sighting._id %>?_method=DELETE">
+        <input type="submit" value="Delete Encounter">
+    </form>
+</body>
+</html>

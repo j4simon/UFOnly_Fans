@@ -4,23 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UFOnly Fans</title>
+    <title>My Encounters</title>
 </head>
-
 <body>
-      <div class="top">
-        <h1>Welcome to UFOnly Fans! </h1>
-        <h3>This is a database for collecting UFO/Alien encounter stories.</h3>
-    </div>
-    <a href="/sightings/new">Log a new encounter</a>
+    <a href="/sightings/create">Log a new encounter</a>
     <h1>Sightings List</h1>
     <ul class="sightings">
-    <% allSightings.forEach((el) => { %>
+    <% User.forEach((el) => { %>
       <a href="/sightings/<%= el._id %>">
         <li><%= el.title %> occured on <%= el.date %> at <%= el.location %></li>
       </a>
     <% }) %>
-    </ul>
-      
+    </ul>    
 </body>
 </html>
