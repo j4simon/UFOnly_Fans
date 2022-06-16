@@ -34,8 +34,15 @@ async function updateSighting(req, res) {
 }
 
 function deleteSighting(req, res) {
-    Sighting.findByIdAndDelete(req.params.id)
-    res.redirect('/sightings')
+    console.log(req.params.id)
+    Sighting.findByIdAndDelete(req.params.id, (err)=>{
+        if(err){
+            res.status(400).json(err)
+            return
+        }
+        res.redirect('/sightings')
+    })
+    
 }
 
 module.exports = {
