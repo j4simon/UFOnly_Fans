@@ -7,6 +7,23 @@ function createSighting(req, res){
     res.redirect('/sightings')
 }
 
+function index(req, res, next) {
+    console.log(req.query)
+    let modelQuery = req.query.name ? {name: new RegExp(req.query.name, 'i')} : {};
+    let sortKey = req.query.sort || 'name';
+    Sighting.find(modelQuery)
+    .sort(sortKey).exec(function(err, sightings){
+        if (err) return next(err);
+        res.render('index', {
+            user,
+            user: req.user,
+            name: req.query.name,
+            sortKey
+        });
+    });
+}
+
+
 function newSighting(req, res){
     res.render('newSighting')
 }

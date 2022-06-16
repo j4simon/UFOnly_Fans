@@ -8,14 +8,23 @@ const sightingSchema = new mongoose.Schema({
     tod: String,
     age: Number,
 
-    owner: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
-      // add back in once OAuth works
-      // required: true
-    }
+  //No Idea Where This Came From, Don't think I Need It
+    // owner: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: 'User',
+    //   required: true
+    // }
   }, {
     timestamps: true
 })
 
-module.exports = mongoose.model('Sighting', sightingSchema)
+const userSchema = new mongoose.Schema({
+  name: String,
+  email: String,
+  sightings: [sightingSchema],
+  googleId: String
+}, {
+timestamps: true
+});
+
+module.exports = mongoose.model('User', userSchema)

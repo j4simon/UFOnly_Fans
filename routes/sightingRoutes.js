@@ -4,8 +4,28 @@ const sightingCtrl = require('../controllers/sightingController');
 const passport = require('passport');
 
 router.get('/', function (req, res) {
-    res.redirect('/sightings')
+    res.render('index')
 });
+
+router.get('/auth/google', passport.authenticate(
+    'google',
+    { scope: ['profile', 'email'] }
+  ));
+
+router.get('/oauth2callback', passport.authenticate(
+    'google',
+    {
+      successRedirect : '/sightings',
+      failureRedirect : '/'
+    }
+  ));
+
+  router.get('/logout', function(req, res){
+    req.logout(function(err){
+        res.redirect('/');
+
+    });
+  });
 
 router.get('/UFOnly_Fans', sightingCtrl.showSightings);
 
