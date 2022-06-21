@@ -16,18 +16,17 @@ router.get('/oauth2callback', passport.authenticate(
     'google',
     {
       successRedirect : '/sightings',
-      failureRedirect : '/'
+      failureRedirect : '/fail'
     }
   ));
 
   router.get('/logout', function(req, res){
     req.logout(function(err){
         res.redirect('/');
-
     });
   });
 
-router.get('/UFOnly_Fans', sightingCtrl.showSightings);
+// router.get('/UFOnly_Fans', sightingCtrl.showSightings);
 
 router.get('/sightings', sightingCtrl.showSightings);
 
@@ -37,7 +36,7 @@ router.post('/sightings', sightingCtrl.createSighting);
 
 router.get('/sightings/:id', sightingCtrl.showDetail);
 
-router.patch('/sightings/:id', sightingCtrl.updateSighting);
+router.patch('/update/:id', sightingCtrl.updateSighting);
 
 router.delete('/sightings/:id', sightingCtrl.deleteSighting);
 

@@ -1,44 +1,56 @@
 const Sighting = require('../models/sighting')
+const User = require('../models/user')
 
-function createSighting(req, res){
-    let newSighting = new Sighting(req.body)
-    console.log(newSighting)
-    newSighting.save(() => console.log("Sighting saved!"))
-    res.redirect('/sightings')
-}
+
 
 function index(req, res, next) {
     console.log(req.query)
     let modelQuery = req.query.name ? {name: new RegExp(req.query.name, 'i')} : {};
     let sortKey = req.query.sort || 'name';
-    Sighting.find(modelQuery)
-    .sort(sortKey).exec(function(err, sightings){
+    User.find(modelQuery)
+    .sort(sortKey).exec(function(err, users){
         if (err) return next(err);
+        console.log(req.user)
         res.render('index', {
-            user,
+            users,
             user: req.user,
             name: req.query.name,
-            sortKey
+            sortKey, 
         });
     });
 }
 
+function createSighting(req, res){
+    console.log("This is my test ", res.locals)
+
+    // User.findById(req.user._id)
+    
+    req.user.sightings.push(req.body);
+    req.user.save(function(err) {
+        res.redirect('/sightings')
+
+    })
+    // let newSighting = new Sighting(req.body)
+    // console.log(newSighting)
+    // newSighting.save(() => console.log("Sighting saved!"))
+    // res.redirect('/sightings')
+}
 
 function newSighting(req, res){
     res.render('newSighting')
 }
 
 async function showSightings(req, res){
-    let allSightings = await Sighting.find({})
-    console.log(allSightings)
-    res.render('index', {allSightings})
+    let user = await User.findById(req.user._id)
+    console.log(user)
+    res.render('index', {user})
 }
 
 function showDetail(req, res){
     console.log("Show Detail function ran")
     console.log(req.params)
     Sighting.findById(req.params.id).then((sighting) =>{
-        console.log(sighting)
+        console.log("My sigting to edit" + sighting)
         res.render('sightingDetail', {sighting})
     })
 }
