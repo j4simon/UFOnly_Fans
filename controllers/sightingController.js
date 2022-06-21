@@ -22,9 +22,6 @@ function index(req, res, next) {
 
 function createSighting(req, res){
     console.log("This is my test ", res.locals)
-
-    // User.findById(req.user._id)
-    
     req.user.sightings.push(req.body);
     req.user.save(function(err) {
         res.redirect('/sightings')
@@ -48,30 +45,40 @@ async function showSightings(req, res){
 
 function showDetail(req, res){
     console.log("Show Detail function ran")
-    console.log(req.params)
-    Sighting.findById(req.params.id).then((sighting) =>{
-        console.log("My sigting to edit" + sighting)
-        res.render('sightingDetail', {sighting})
+    console.log("Showing detail" + req.params.id)
+    // Sighting.findById(req.params.id).then((sighting) =>{
+    //     console.log("My sigting to edit" + sighting)
+    //     res.render('sightingDetail', {sighting})
+    // })
+    User.findById({_id: req.params.user_id, "sightings._id": req.params.id}, function(err,user){
+              console.log("My sighting to edit" + user)
+        res.render('sightingDetail', {user, req})
+  
     })
 }
 
 async function updateSighting(req, res) {
     console.log(req.params)
     console.log(req.body)
-    await Sighting.findByIdAndUpdate(req.params.id, req.body)
-    res.redirect(`/sightings/${req.params.id}`)
-}
+    await User.findByIdAndUpdate({_id: req.params.user_id, "sightings._id": req.params.id}, function(err,user){
+    res.redirect(`/user/sightings/`)
+        })
+    
+    }
+    // await User.findByIdAndUpdate({_id: req.params.user_id, "sightings._id": req.params.id}, function(err,user){
+    // res.redirect(`/user/sightings/`)
+    // })
+
 
 function deleteSighting(req, res) {
     console.log(req.params.id)
-    Sighting.findByIdAndDelete(req.params.id, (err)=>{
+    User.findByIdAndDelete({_id: req.params.user_id, "sightings._id": req.params.id}, (err)=>{
         if(err){
             res.status(400).json(err)
             return
+        res.redirect('/user/sightings')
         }
-        res.redirect('/sightings')
     })
-    
 }
 
 module.exports = {

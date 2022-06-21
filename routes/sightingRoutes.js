@@ -26,7 +26,7 @@ router.get('/oauth2callback', passport.authenticate(
     });
   });
 
-// router.get('/UFOnly_Fans', sightingCtrl.showSightings);
+router.get('/UFOnly_Fans', sightingCtrl.showSightings);
 
 router.get('/sightings', sightingCtrl.showSightings);
 
@@ -34,11 +34,11 @@ router.get('/sightings/new', sightingCtrl.newSighting);
 
 router.post('/sightings', sightingCtrl.createSighting);
 
-router.get('/sightings/:id', sightingCtrl.showDetail);
+router.get('/user/:user_id/sightings/:id', sightingCtrl.showDetail);
 
-router.patch('/update/:id', sightingCtrl.updateSighting);
+router.patch('/user/:user_id/sightings/:id', sightingCtrl.updateSighting);
 
-router.delete('/sightings/:id', sightingCtrl.deleteSighting);
+router.delete('/user/:user_id/sightings/:id', sightingCtrl.deleteSighting);
 
 
 module.exports = router;

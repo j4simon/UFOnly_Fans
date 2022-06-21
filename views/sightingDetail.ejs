@@ -8,27 +8,32 @@
 </head>
 <body>
     <a href="/sightings">Go Back</a>
+    <% user.sightings.forEach(function(sighting) {%>
+      <% if(sighting._id == req.params.id) { %>
     <h1>Sighting Detail</h1>
-    <h2>Title: <%= sighting._id.title %></h2>
-    <h2>Description: <%= sighting._id.desc %></h2>
-    <h2>Location: <%= sighting._id.location %></h2>
-    <h2>Date of Encounter: <%= sighting._id.date %></h2>
-    <h2>Time of Day: <%= sighting._id.tod %></h2>
-    <h2>Age at Encounter: <%= sighting._id.age %></h2>
+    <h2>Title: <%= sighting.title %></h2>
+    <h2>Description: <%= sighting.desc %></h2>
+    <h2>Location: <%= sighting.location %></h2>
+    <h2>Date of Encounter: <%= sighting.date %></h2>
+    <h2>Time of Day: <%= sighting.tod %></h2>
+    <h2>Age at Encounter: <%= sighting.age %></h2>
 
     
     <form method="POST" action="/sightings/<%= sighting._id %>?_method=PATCH">
-      Title: <input name="title" value="<%= sighting._id.title %>" type="text">
-      Description: <input name="desc" value="<%= sighting._id.desc %>" type="text">
-      Location: <input name="location" value="<%= sighting._id.location %>" type="text">
-      Date: <input name="date" value="<<%= sighting._id.date %>>" type="text">
-      Time of Day: <input name="tod" value="<%= sighting._id.tod %>" type="text">
-      Age: <input name="age" value="<%= sighting._id.age %>" type="text">
+      Title: <input name="title" value="<%= sighting.title %>" type="text">
+      Description: <input name="desc" value="<%= sighting.desc %>" type="text">
+      Location: <input name="location" value="<%= sighting.location %>" type="text">
+      Date: <input name="date" value="<<%= sighting.date %>>" type="text">
+      Time of Day: <input name="tod" value="<%= sighting.tod %>" type="text">
+      Age: <input name="age" value="<%= sighting.age %>" type="text">
       <input type="submit" value="Edit Encounter">
   </form>  
     <form method="POST" action="/sightings/<%= sighting._id %>?_method=DELETE">
       <input type="submit" value="Delete Encounter">
   </form>
+  <%}%>
+  <%})%>
+
   </ul>    
 </body>
 </html>

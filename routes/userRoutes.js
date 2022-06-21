@@ -32,11 +32,11 @@ router.get('/', userCtrl.index);
 
 router.post('/', userCtrl.create);
 
-router.get('/user/:id', userCtrl.show);
+router.get('/user/:user_id/sightings/:id', userCtrl.show);
 
-router.put('/user/:id', userCtrl.update);
+router.put('/user/:user_id/sightings/:id', userCtrl.update);
 
-router.delete('/user/:id', userCtrl.deleteUFO)
+router.delete('/user/:user_id/sightings/:id', userCtrl.deleteUFO)
 
 
 module.exports = router

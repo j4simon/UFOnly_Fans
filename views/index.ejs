@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="stylesheets/style.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script defer src="/main.js"></script>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anek+Latin:wght@100&family=Indie+Flower&family=Lato:wght@100;300&family=Poller+One&family=Quicksand:wght@300&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -29,8 +34,8 @@
     <h3>Sightings List</h3>
     <ul class="sightings">
     <% user?.sightings?.forEach((el) => { %>
-      <a href="/sightings/<%= el._id %>">
-        <li><%= el.title %> occured on <%= el.date %> at <%= el.location %></li>
+      <a href="user/<%= user._id %>/sightings/<%= el._id %>">
+        <li><%= el.title %> <br> Encounter occured on <%= el.date %> at <%= el.location %></li>
       </a>
     <% }) %>
     </ul>
